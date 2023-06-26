@@ -1,4 +1,4 @@
-export interface StudyList {
+export interface ITask {
   task: string;
   time: string;
 }

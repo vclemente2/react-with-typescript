@@ -1,16 +1,22 @@
 import style from "./Form.module.scss";
 import { Button } from "../Button";
 import { useState } from "react";
-import { StudyList } from "../../Interfaces/StudyList";
+import { ITask } from "../../Interfaces/ITask";
 
-export function Form({ tasks, setTasks }) {
-  const [time, setTime] = useState();
-  const [task, setTask] = useState();
+export function Form({
+  tasks,
+  setTasks
+}: {
+  tasks: ITask[];
+  setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
+}) {
+  const [time, setTime] = useState("00:00");
+  const [task, setTask] = useState("");
 
   return (
     <form
       className={style.novaTarefa}
-      onSubmit={(event) => {
+      onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
         setTasks([...tasks, { task: task, time: time }]);
       }}
@@ -45,7 +51,7 @@ export function Form({ tasks, setTasks }) {
           required
         ></input>
       </div>
-      <Button>Enviar</Button>
+      <Button type="submit">Enviar</Button>
     </form>
   );
 }
