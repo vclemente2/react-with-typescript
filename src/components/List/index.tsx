@@ -1,22 +1,12 @@
+import { StudyList } from "../../Interfaces/StudyList";
 import style from "./List.module.scss";
 
-export function List() {
-  const tasks = [
-    {
-      task: "React",
-      time: "1:30:00"
-    },
-    {
-      task: "Javascript",
-      time: "2:20:00"
-    }
-  ];
-
+export function List({ tasks }: { tasks: StudyList[] }) {
   return (
     <aside className={style.listaTarefas}>
       <h2>Estudos do dia</h2>
       <ul>
-        {tasks.map((item, index) => {
+        {tasks.map((item: StudyList, index: number) => {
           return (
             <li key={index} className={style.item}>
               <h3>{item.task}</h3>
