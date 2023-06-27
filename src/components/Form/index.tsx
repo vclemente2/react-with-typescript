@@ -2,12 +2,11 @@ import style from "./Form.module.scss";
 import { Button } from "../Button";
 import { useState } from "react";
 import { ITask } from "../../Interfaces/ITask";
+import { v4 as uuid } from "uuid";
 
 export function Form({
-  tasks,
   setTasks
 }: {
-  tasks: ITask[];
   setTasks: React.Dispatch<React.SetStateAction<ITask[]>>;
 }) {
   const [time, setTime] = useState("00:00");
@@ -18,7 +17,18 @@ export function Form({
       className={style.novaTarefa}
       onSubmit={(event: React.FormEvent<HTMLFormElement>) => {
         event.preventDefault();
-        setTasks([...tasks, { task: task, time: time }]);
+        setTasks((currentTasks: ITask[]) => [
+          ...currentTasks,
+          {
+            id: uuid(),
+            task: task,
+            time: time,
+            completed: false,
+            selected: false
+          }
+        ]);
+        setTime("00:00");
+        setTask("");
       }}
     >
       <div className={style.inputContainer}>
