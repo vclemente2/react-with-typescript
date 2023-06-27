@@ -14,7 +14,8 @@ function App() {
     setTasks((currentTasks) =>
       currentTasks.map((item) => ({
         ...item,
-        selected: item.id === task.id ? true : false
+        selected:
+          item.id === task.id ? (item.selected === false ? true : false) : false
       }))
     );
   }
@@ -23,7 +24,7 @@ function App() {
     <div className={style.AppStyle}>
       <Form setTasks={setTasks} />
       <List tasks={tasks} selectTask={selectTask} />
-      <Timer />
+      <Timer selectedTask={selectedTask} />
     </div>
   );
 }
