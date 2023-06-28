@@ -7,9 +7,10 @@ import { timeToSecond } from "../../common/utils/time";
 
 interface TimerProps {
   selectedTask: ITask | undefined;
+  completeTask: () => void;
 }
 
-export function Timer({ selectedTask }: TimerProps) {
+export function Timer({ selectedTask, completeTask }: TimerProps) {
   const [time, setTime] = useState<number>(0);
 
   useEffect(() => {
@@ -17,12 +18,14 @@ export function Timer({ selectedTask }: TimerProps) {
     if (selectedTask?.selected) setTime(0);
   }, [selectedTask]);
 
-  function countdown(countdownTime: number = 0) {
+  function countdown(countdownTime: number) {
     setTimeout(() => {
       if (countdownTime > 0) {
         setTime(countdownTime - 1);
         return countdown(countdownTime - 1);
       }
+
+      completeTask();
     }, 1000);
   }
 
